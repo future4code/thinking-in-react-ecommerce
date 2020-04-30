@@ -34,10 +34,9 @@ export class Products extends React.Component {
         </label>
       </ProductsHeader>
       <ProductsGrid>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
+        {this.props.products.map((product) => {
+          return <ProductCard product={product}/>
+        })}
       </ProductsGrid>
     </ProductsContainer>
   }
