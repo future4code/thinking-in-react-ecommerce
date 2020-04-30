@@ -21,21 +21,37 @@ const ProductsGrid = styled.div`
 `
 
 export class Products extends React.Component {
+
+  state = {
+    sort: 'DECRESCENTE'
+  }
+
+  getFilteredAndOrderedList = () => {
+    return this.props.products
+      .filter((product) => product.price < this.props.maxFilter)
+      .filter((product) => product.price > this.props.minFilter)
+      .filter((product) => product.name.includes(this.props.nameFilter))
+      .sort((a, b) => this.state.sort === 'CRESCENTE' ? a.price - b.price : b.price - a.price)
+  }
+
   render() {
+    const filteredAndOrderedList = this.getFilteredAndOrderedList()
     return <ProductsContainer>
       <ProductsHeader>
-        <p>Quantidade de produtos: 4</p>
+        <p>Quantidade de produtos: {filteredAndOrderedList.length}</p>
         <label>
           Ordenação:
-          <select>
-            <option>Crescente</option>
-            <option>Decrescente</option>
+          <select value={this.state.sort}>
+            <option value={'CRESCENTE'}>Crescente</option>
+            <option value={'DECRESCENTE'}>Decrescente</option>
           </select>
         </label>
       </ProductsHeader>
       <ProductsGrid>
-        {this.props.products.map((product) => {
-          return <ProductCard product={product}/>
+        {filteredAndOrderedList.map((product) => {
+          return <ProductCard
+            product={product}
+          />
         })}
       </ProductsGrid>
     </ProductsContainer>

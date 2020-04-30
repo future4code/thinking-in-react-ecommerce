@@ -16,8 +16,8 @@ const ItemContainer = styled.div`
 export class ShoppingCartItem extends React.Component {
   render() {
     return <ItemContainer>
-      <p>1x</p>
-      <p>Produto</p>
+      <p>{this.props.cartItem.quantity}x</p>
+      <p>{this.props.cartItem.name}</p>
       <button>Remover</button>
     </ItemContainer>
   }

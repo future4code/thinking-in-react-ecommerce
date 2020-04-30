@@ -30,7 +30,9 @@ export class ProductCard extends React.Component {
       <CardInfo>
         <p>{product.name}</p>
         <p>R${product.price},00</p>
-        <AddToCartButton>Adicionar ao carrinho</AddToCartButton>
+        <AddToCartButton>
+          Adicionar ao carrinho
+        </AddToCartButton>
       </CardInfo>
     </CardContainer>
   }

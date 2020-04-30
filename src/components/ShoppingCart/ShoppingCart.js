@@ -13,16 +13,27 @@ const CartListContainer = styled.div`
 `
 
 export class ShoppingCart extends React.Component {
+  getTotalValue = () => {
+    let totalValue = 0
+
+    for(let product of this.props.productsInCart) {
+      totalValue += product.price * product.quantity
+    }
+
+    return totalValue
+  }
+
   render() {
     return <ShoppingCartContainer>
       <h3>Carrinho:</h3>
       <CartListContainer>
-        <ShoppingCartItem/>
-        <ShoppingCartItem/>
-        <ShoppingCartItem/>
-        <ShoppingCartItem/>
+        {this.props.productsInCart.map((product) => {
+          return <ShoppingCartItem
+                    cartItem={product}
+                  />
+        })}
       </CartListContainer>
-      <p>Valor total: R$100,00</p>
+      <p>Valor total: R${this.getTotalValue()},00</p>
     </ShoppingCartContainer>
   }
 }
